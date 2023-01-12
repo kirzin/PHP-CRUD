@@ -1,0 +1,33 @@
+
+//// another file
+<form action="propose.php">
+      <input type="submit" class="btn btn-secondary" value = "Propose">
+    <input type="hidden" name="propose_id" value="
+    <?php echo $result['Prequest_id'];?>
+    ">
+///
+
+<?php
+require('db.php');
+$pid = $_GET['propose_id'];
+$querypid = "SELECT * FROM prequest WHERE Prequest_id = '" . $pid . "'";
+$sqlpid = mysqli_query($conn,$querypid);
+
+if ($sqlpid && mysqli_num_rows($sqlpid) > 0) {
+    $spid = mysqli_fetch_array($sqlpid);
+} else {
+    echo "No rows returned";
+}
+
+?>
+
+///
+
+ <?php if($spid) { ?>
+    <h1>
+        <?php echo $spid['Prequest_id'];?>
+    </h1>
+    <h1>
+        <?php echo $spid['Project_Name'];?>
+    </h1>
+    <?php } ?>
